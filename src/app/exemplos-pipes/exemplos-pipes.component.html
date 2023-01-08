@@ -1,0 +1,42 @@
+<h3>Exemplo de uso de pipes padrões e customizados</h3>
+
+<p>Título: {{ livro.titulo | camelCase }}</p>
+<p>Estrelas: {{ livro.rating | number:'1.1-1' }}</p>
+<p>Páginas: {{ livro.numeroPaginas }}</p>
+<p>Preço: {{ livro.preco | currency: 'BRL'}}</p>
+<p>Data de lançamento: {{ livro.dataLancamento | date | uppercase }} </p>
+<p>Url: {{ livro.url }} </p>
+<br>
+<p>Livro: {{ livro | json }}</p>
+
+
+
+<h3>Pipes impuros e puros</h3>
+<label>Filtrar: </label>
+<input type="text" [(ngModel)]="filtro">
+<br>
+<input type="text" name="" value="" #campo>
+<br>
+<button type="button" name="button" (click)="addCurso(campo.value)">Add curso</button>
+
+
+<h4>Pipe assincrono</h4>
+<p> {{ valorAsync | async }}</p>
+<p> {{ valorAsync2 | async }}</p>
+
+<h4>Pipes puro</h4>
+<!-- NÃO SE UTILIZA PIPES COMO FILTRO OU ORDER BY EM ARRAYS -->
+<ul>
+  <li *ngFor="let liv of livros | filtroArray: filtro"> {{ liv }}</li>
+</ul>
+
+<h4>Pipes impuro</h4>
+<ul>
+  <li *ngFor="let liv of livros | filtroArrayImpuro: filtro"> {{ liv }}</li>
+</ul>
+
+<!-- MANEIRA CORRETA -->
+<h4>Maneira correta de usar filtro nos projetos</h4>
+<ul>
+  <li *ngFor="let liv of obterCursos()"> {{ liv }}</li>
+</ul>
